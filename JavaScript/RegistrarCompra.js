@@ -29,9 +29,10 @@ $(document).ready(function(){
             html="<option value='0'>--Seleccione una Almacen--</option>";
             if(json.result.almacen!==null)
             for (var i = 0; i < json.result.almacen.length; i++) {
+                alert(json.result.almacen[i].id_almacen);
                 html+="<option value='"+json.result.almacen[i].id_almacen+"'>"+json.result.almacen[i].nombre+"</option>";
             }
-            $("#almacen option[value="+json.result.id_almacen+"]").attr("selected",true);
+            $("#almacen option[value='"+json.result.id_almacen+"']").attr("selected",true);
             $("#almacen").html(html);
             html="<option value='0'>-- Unidad de Medida --</option>";
             if(json.result.unidad!==null)

@@ -2,7 +2,7 @@
 
 class PROVEDOR {
 
-    var $id_Provedor;
+    var $id_proveedor;
     var $Nombre;
     var $direccion;
     var $telefono;
@@ -16,8 +16,8 @@ class PROVEDOR {
         $this->CON = $con;
     }
 
-    function contructor($id_Provedor, $Nombre, $direccion, $telefono, $correo, $Contacto, $Telefono_Contacto, $sucursal_id) {
-        $this->id_Provedor = $id_Provedor;
+    function contructor($id_proveedor, $Nombre, $direccion, $telefono, $correo, $Contacto, $Telefono_Contacto, $sucursal_id) {
+        $this->id_proveedor = $id_proveedor;
         $this->Nombre = $Nombre;
         $this->direccion = $direccion;
         $this->telefono = $telefono;
@@ -32,7 +32,7 @@ class PROVEDOR {
             $lista = array();
             while ($row = $resultado->fetch_assoc()) {
                 $provedor = new PROVEDOR();
-                $provedor->id_Provedor = $row['id_Provedor'] == null ? "" : $row['id_Provedor'];
+                $provedor->id_proveedor = $row['id_proveedor'] == null ? "" : $row['id_proveedor'];
                 $provedor->Nombre = $row['nombre'] == null ? "" : $row['nombre'];
                 $provedor->direccion = $row['direccion'] == null ? "" : $row['direccion'];
                 $provedor->telefono = $row['telefono'] == null ? "" : $row['telefono'];
@@ -49,17 +49,17 @@ class PROVEDOR {
     }
 
     function todoXsucursal($texto,$sucursal) {
-        $consulta = "SELECT provedor.id_Provedor,provedor.nombre,provedor.direccion,provedor.telefono";
-	$consulta .= ",provedor.correo,provedor.Telefono_Contacto,provedor.contacto";
-        $consulta .= " FROM eldebatedegusto.provedor";
-        $consulta .= " where provedor.sucursal_id=$sucursal and (provedor.nombre like '%$texto%' or Telefono_Contacto like '%$texto%')";
+        $consulta = "SELECT proveedor.id_proveedor,proveedor.nombre,proveedor.direccion,proveedor.telefono";
+	$consulta .= ",proveedor.correo,proveedor.Telefono_Contacto,proveedor.contacto";
+        $consulta .= " FROM eldebatedegusto.proveedor";
+        $consulta .= " where proveedor.sucursal_id=$sucursal and (proveedor.nombre like '%$texto%' or Telefono_Contacto like '%$texto%')";
         $resultado = $this->CON->consulta($consulta);
         if ($resultado->num_rows > 0) {
             $lista = array();
             while ($row = $resultado->fetch_assoc()) {
                 $provedor =array();
-                $idprovedor=$row['id_Provedor'] == null ? "" : $row['id_Provedor'];
-                $provedor['id_Provedor']= $idprovedor;
+                $idprovedor=$row['id_proveedor'] == null ? "" : $row['id_proveedor'];
+                $provedor['id_proveedor']= $idprovedor;
                 $provedor['Nombre']= $row['nombre'] == null ? "" : $row['nombre'];
                 $provedor['direccion']= $row['direccion'] == null ? "" : $row['direccion'];
                 $provedor['telefono']= $row['telefono'] == null ? "" : $row['telefono'];
@@ -87,7 +87,7 @@ class PROVEDOR {
     }
 
     function buscarXID($id) {
-        $consulta = "select * from eldebatedegusto.PROVEDOR where id_Provedor=$id";
+        $consulta = "select * from eldebatedegusto.PROVEDOR where id_proveedor=$id";
         $result = $this->CON->consulta($consulta);
         $empresa = $this->rellenar($result);
         if ($empresa == null) {
@@ -96,18 +96,19 @@ class PROVEDOR {
         return $empresa[0];
     }
 
-    function modificar($id_Provedor) {
-        $consulta = "update eldebatedegusto.PROVEDOR set id_Provedor =" . $this->id_Provedor . ", Nombre ='" . $this->Nombre . "', direccion ='" . $this->direccion . "', telefono ='" . $this->telefono . "', correo ='" . $this->correo . "', Contacto ='" . $this->Contacto . "', Telefono_Contacto ='" . $this->Telefono_Contacto . "', sucursal_id =" . $this->sucursal_id . " where id_Provedor=" . $id_Provedor;
+    function modificar($id_proveedor) {
+        $consulta = "update eldebatedegusto.proveedor set id_proveedor =" . $this->id_proveedor . ", nombre ='" . $this->Nombre . "', direccion ='" . $this->direccion . "', telefono ='" . $this->telefono . "', correo ='" . $this->correo . "', contacto ='" . $this->Contacto . "', telefono_Contacto ='" . $this->Telefono_Contacto . "', sucursal_id =" . $this->sucursal_id . " where id_proveedor=" . $id_proveedor;
+        echo $consulta;
         return $this->CON->manipular($consulta);
     }
 
-    function eliminar($id_Provedor) {
-        $consulta = "delete from eldebatedegusto.PROVEDOR where id_Provedor=" . $id_Provedor;
+    function eliminar($id_proveedor) {
+        $consulta = "delete from eldebatedegusto.PROVEDOR where id_proveedor=" . $id_proveedor;
         return $this->CON->manipular($consulta);
     }
 
     function insertar() {
-        $consulta = "insert into eldebatedegusto.PROVEDOR(id_Provedor, Nombre, direccion, telefono, correo, Contacto, Telefono_Contacto, sucursal_id) values(" . $this->id_Provedor . ",'" . $this->Nombre . "','" . $this->direccion . "','" . $this->telefono . "','" . $this->correo . "','" . $this->Contacto . "','" . $this->Telefono_Contacto . "'," . $this->sucursal_id . ")";
+        $consulta = "insert into eldebatedegusto.proveedor(id_proveedor, Nombre, direccion, telefono, correo, Contacto, Telefono_Contacto, sucursal_id) values(" . $this->id_proveedor . ",'" . $this->Nombre . "','" . $this->direccion . "','" . $this->telefono . "','" . $this->correo . "','" . $this->Contacto . "','" . $this->Telefono_Contacto . "'," . $this->sucursal_id . ")";
         if (!$this->CON->manipular($consulta))
             return 0;
         $consulta = "SELECT LAST_INSERT_ID() as id";

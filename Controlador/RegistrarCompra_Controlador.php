@@ -17,7 +17,7 @@ $personalsession = $_SESSION["personal"];
 $sucursalsession = $_SESSION["sucursal"];
 $restaurantesession = $_SESSION["restaurante"];
 $Herramienta = new Herramientas();
-$con = new CONN("rest", "wdigital");
+$con = new CONN("tito", "tito_root");
 if (!$con->estado) {
     $error = "No se pudo establecer conexion. Intente nuevamente.";
     $reponse = array("error" => $error, "result" => $resultado);
@@ -114,6 +114,7 @@ if($proceso==="registarProducto"){
             if($producto->modificar($stock->Producto_Id))$id=$stock->Producto_Id;
         }
         if($id===0){
+
             $error="No se pudo registrar el producto.Intente nuevamente";
         }else{
             $stock->contructor(0, $sucursal, $almacen, $id, $cantidad, $cantmin);

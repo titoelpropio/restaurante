@@ -198,7 +198,7 @@ class STOCK {
     }
 
     function insertar() {
-        $consulta = "insert into eldebatedegusto.STOCK(id_stock, sucursal_id, almacen_id, Producto_Id, cantidad, cantidadmin) values(" . $this->id_stock . "," . $this->sucursal_id . "," . $this->almacen_id . "," . $this->Producto_Id . "," . $this->cantidad . "," . $this->cantidadmin . ")";
+        $consulta = "insert into eldebatedegusto.STOCK(id_stock, sucursal_id, almacen_id, Producto_Id, cantidad) values(" . $this->id_stock . "," . $this->sucursal_id . "," . $this->almacen_id . "," . $this->Producto_Id . "," . $this->cantidad . ")";
         return $this->CON->manipular($consulta);
     }
 

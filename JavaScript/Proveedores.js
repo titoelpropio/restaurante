@@ -189,6 +189,7 @@ function eliminarProducto(ele, producto) {
     }
 }
 function filtrarProvedor(e) {
+    
     if (e !== "" && e.keyCode !== 13) {
         return;
     }

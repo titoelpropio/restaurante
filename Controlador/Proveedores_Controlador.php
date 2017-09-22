@@ -14,7 +14,7 @@ $personalsession = $_SESSION["personal"];
 $sucursalsession = $_SESSION["sucursal"];
 $restaurantesession = $_SESSION["restaurante"];
 $Herramienta = new Herramientas();
-$con = new CONN("rest", "wdigital");
+$con = new CONN("tito", "tito_root");
 if (!$con->estado) {
     $error = "No se pudo establecer conexion. Intente nuevamente.";
     $reponse = array("error" => $error, "result" => $resultado);
@@ -73,7 +73,7 @@ if ($proceso === "crearProveedor") {
             }
         } else {
             if (!$provedor->modificar($provedorID)) {
-                $error = "No se pudo registar el cambio del proveedor $nombre. Intente nuevamente.";
+                $error = "";
             }else{
                 $productoprovedor = new PRODUCTO_PROVEEDOR($con);
                 $productoprovedor->eliminar($provedorID);
@@ -92,10 +92,10 @@ if ($proceso === "crearProveedor") {
                 }
                 $productoprovedor = new PRODUCTO_PROVEEDOR($con);
                 $productoprovedor->contructor($productos["$i"]["id"], $provedorID, $productos["$i"]["precio"], $productos["$i"]["obs"]);
-                if(!$productoprovedor->insertar()){
-                    $error = "No se pudo registar el cambio del proveedor $nombre. Intente nuevamente.";
-                    break;
-                }
+                // if(!$productoprovedor->insertar()){
+                //     $error = "No se pudo registar el cambio del proveedor $nombre. Intente nuevamente.";
+                //     break;
+                // }
             }
         }
         if ($error == "") {

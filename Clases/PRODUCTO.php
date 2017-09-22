@@ -96,8 +96,11 @@ where stock.sucursal_id=sucursal.id_sucursal and sucursal.restaurante_id=$restau
         $consulta = "insert into eldebatedegusto.PRODUCTO(Id_Producto, Precio_Compra, Precio_Venta, nombre, Unidad_Id, tipo,foto) values(" . $this->Id_Producto . "," . $this->Precio_Compra . "," . $this->Precio_Venta . ",'" . $this->nombre . "'," . $this->Unidad_Id . ",'" . $this->tipo . "','" . $this->foto . "')";
         if (!$this->CON->manipular($consulta))
             return 0;
+        // echo $consulta;
+
         $consulta = "SELECT LAST_INSERT_ID() as id";
         $resultado = $this->CON->consulta($consulta);
+        
         return $resultado->fetch_assoc()['id'];
     }
 

@@ -55,7 +55,7 @@ class ALMACEN {
             $lista = array();
             while ($row = $resultado->fetch_assoc()) {
                 $sucursal = array();
-                $sucursal["id_sucursal"] = $row['id_almacen'] == null ? "" : $row['id_almacen'];
+                $sucursal["id_almacen"] = $row['id_almacen'] == null ? "" : $row['id_almacen'];
                 $sucursal["nombre"] = $row['nombre'] == null ? "" : $row['nombre'];
                 $lista[] = $sucursal;
             }

@@ -24,7 +24,7 @@ class UNIDAD {
                 $unidad = new UNIDAD();
                 $unidad->Id_Unidad = $row['Id_Unidad'] == null ? "" : $row['Id_Unidad'];
                 $unidad->descripcion = $row['descripcion'] == null ? "" : $row['descripcion'];
-                $unidad->restaurante_id = $row['restaurante_id'] == null ? "" : $row['restaurante_id'];
+                // $unidad->restaurante_id = $row['restaurante_id'] == null ? "" : $row['restaurante_id'];
                 $lista[] = $unidad;
             }
             return $lista;
@@ -34,7 +34,7 @@ class UNIDAD {
     }
 
     function todo($rest) {
-        $consulta = "select * from eldebatedegusto.UNIDAD where restaurante_id=$rest";
+        $consulta = "select * from eldebatedegusto.UNIDAD ";
         $result = $this->CON->consulta($consulta);
         return $this->rellenar($result);
     }
